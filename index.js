@@ -26,10 +26,10 @@ const app = express(); // Создаем приложение express
 // Хранилище мультера
 const storage = multer.diskStorage({
   destination: (_, __, cb) => {
-    if(!fs.existsSync('uploads')){
-      fs.mkdirSync('uploads');
+    if(!fs.existsSync('upload')){
+      fs.mkdirSync('upload');
     }
-    cb(null, 'uploads');
+    cb(null, 'upload');
   },
   filename: (_, file, cb) => {
     cb(null, file.originalname);
@@ -46,10 +46,10 @@ app.use(express.json()); //express know what json is
 app.use(cors()); // cors
 
 //image upload
-app.use('uploads', express.static('uploads'));
-app.post('uploads', checkAuth, upload.single('image'), (req, res) => {
+app.use('upload', express.static('upload'));
+app.post('upload', checkAuth, upload.single('image'), (req, res) => {
   res.json({
-    url: `uploads/${req.file.originalname}`,
+    url: `upload/${req.file.originalname}`,
   });
 }); 
 
