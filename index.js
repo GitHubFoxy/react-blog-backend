@@ -9,7 +9,7 @@ import {registerValidator,loginValidator,PostCreateValidator} from './validation
 // Блок базы данных
 mongoose.set('strictQuery', false);
 mongoose
-  .connect('mongodb+srv://admin:admin@cluster0.sbqnerh.mongodb.net/blog?retryWrites=true&w=majority')
+  .connect(process.env.MONGODB_URI)
   .then(() => {
     console.log('CLUSTER IS OK!')
   })
@@ -66,7 +66,7 @@ app.get('/tags', PostController.getLastTags);
 //posts routes
 
 //запуск порта
-app.listen(4444, (err) => {
+app.listen(process.env.PORT || 4444, (err) => {
   if (err) {
     return console.log(err);
   } else {
