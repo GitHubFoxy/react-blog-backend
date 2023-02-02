@@ -46,10 +46,10 @@ app.use(express.json()); //express know what json is
 app.use(cors()); // cors
 
 //image upload
-app.use('/uploads', express.static('uploads'));
-app.post('/upload', checkAuth, upload.single('image'), (req, res) => {
+app.use('uploads', express.static('uploads'));
+app.post('upload', checkAuth, upload.single('image'), (req, res) => {
   res.json({
-    url: `/uploads/${req.file.originalname}`,
+    url: `uploads/${req.file.originalname}`,
   });
 }); 
 
